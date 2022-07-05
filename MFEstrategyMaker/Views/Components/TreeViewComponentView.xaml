@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="MFEstrategyMaker.Views.Components.TreeViewComponentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MFEstrategyMaker.Views.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <TreeView Margin="-1 0 0 30" FontSize="15" Padding="3 10"
+                  Background="#242424"
+                  ItemsSource="{Binding TreeViewComponentCollectionsViewModels}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding TreeViewComponentGroupsViewModels}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/icons8-database-40.png" Margin="0,0,5,0" Height="18" Width="18" />
+                        <TextBlock Text="{Binding CollectionName}" Foreground="NavajoWhite" FontWeight="Medium"/>
+                    </StackPanel>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding TreeViewComponentRegistersViewModel}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Images/icons8-folder-40.png" Margin="0,0,5,0" Height="18" Width="18" />
+                                <TextBlock Text="{Binding GroupName}" Foreground="NavajoWhite"/>
+                            </StackPanel>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="../Images/icons8-document-40.png" Margin="0,0,5,0" Height="18" Width="18" />
+                                        <TextBlock Text="{Binding RegisterName}" Foreground="AntiqueWhite"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
+
+    </Grid>
+</UserControl>

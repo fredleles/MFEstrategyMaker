@@ -1,0 +1,156 @@
+﻿<UserControl x:Class="MFEstrategyMaker.Views.ModalsViews.AddRegisterModal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MFEstrategyMaker.Views.ModalsViews"
+             xmlns:registerviewmodel="clr-namespace:MFEstrategyMaker.ViewModels.RegisterViewModel"
+             d:DataContext="{d:DesignInstance Type=registerviewmodel:AddRegisterModal}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="NOVO REGISTRO DIÁRIO"
+                   Foreground="Black"
+                   FontWeight="Medium"
+                   FontSize="18" Height="40"
+                   Padding="10 5"
+                   Background="#F49D37"/>
+
+        </StackPanel>
+
+        <Border Grid.Row="1" BorderBrush="Black"
+                BorderThickness="1" Height="400" Width="500"
+                Margin="-1 0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <WrapPanel Grid.Row="0" HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="10">
+                    <WrapPanel VerticalAlignment="Center">
+                        <TextBlock VerticalAlignment="Center" Text="Data: " />
+                        <DatePicker Width="140"/>
+                    </WrapPanel>
+                    <WrapPanel VerticalAlignment="Center"
+                               Margin="40 0 0 0">
+                        <TextBlock VerticalAlignment="Center" Text="Modelo base: " />
+                        <ComboBox SelectedIndex="0" Width="140">
+                            <ComboBoxItem Content="Modelo1"/>
+                            <ComboBoxItem Content="Modelo1"/>
+                        </ComboBox>
+                    </WrapPanel>
+                </WrapPanel>
+
+                <StackPanel Grid.Row="1">
+                    <Border BorderBrush="gray" HorizontalAlignment="Center" BorderThickness="0.6">
+                        <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                            <Label Content="Novo Objeto (nome): " />
+                            <TextBox Width="100"
+                                     Text="{Binding ObjectName, UpdateSourceTrigger=PropertyChanged}"/>
+                            
+                            <Label Content="Tipo: " />
+                            <ComboBox SelectedIndex="3" Width="120"
+                                  VerticalAlignment="Center">
+                                <ComboBoxItem Content="Valor" />
+                                <ComboBoxItem Content="Método" />
+                                <ComboBoxItem Content="Ref. (API)" />
+                                <ComboBoxItem Content="Ref. (Arquivo .txt)" />
+                                <ComboBoxItem Content="Ref. (URL)" />
+                            </ComboBox>
+                            <Button Content="Inserir" Margin="10 0 0 0" Padding="5 0" Cursor="Hand"/>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Background="gray" Margin="0 10" VerticalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center" Text="Atributos" Foreground="white" VerticalAlignment="Center"/>
+                        <ListBox>
+                            <ListBoxItem Content="DOLFUT" />
+                            <ListBoxItem Content="DI1" />
+                            
+                        </ListBox>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+        </Border>
+
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Right"
+                   VerticalAlignment="Center">
+            <Button Content="Cancelar"
+                    Foreground="Black"
+                    Command="{Binding CloseModalCommand}"
+                    FontSize="12"
+                    FontWeight="Bold">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" Value="Arial" />
+                        <Setter Property="Background" Value="#C6C5B9" />
+                        <Setter Property="Cursor" Value="Hand" />
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Gray" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="70" Height="30" BorderBrush="gray"
+                                BorderThickness="1"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center" />
+
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Content="Salvar"
+                    Foreground="WhiteSmoke"
+                    Command="{Binding SubmitCommand}"
+                    IsEnabled="{Binding CanSubmit}"
+                    FontSize="12"
+                    Margin="10 0"
+                    FontWeight="Bold">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" Value="Arial" />
+                        <Setter Property="Background" Value="#3f88c5" />
+                        <Setter Property="Cursor" Value="Hand" />
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#2A528D" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="70" Height="30" BorderBrush="gray"
+                                BorderThickness="1"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center" />
+
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </WrapPanel>
+
+    </Grid>
+</UserControl>
