@@ -17,6 +17,9 @@
         <DataTemplate DataType="{x:Type vmregister:AddRegisterModal}">
             <modalsviews:AddRegisterModal/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vmregister:AddNewDBTableVM}">
+            <modalsviews:AddNewDBTable/>
+        </DataTemplate>
     </Window.Resources>
     
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">

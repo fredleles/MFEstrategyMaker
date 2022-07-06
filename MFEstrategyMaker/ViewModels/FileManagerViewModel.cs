@@ -30,7 +30,7 @@ namespace MFEstrategyMaker.ViewModels
             AddDailyRegisterCommand = new OpenModalCommand<AddRegisterModal>(navigationStore,
                 () => new AddRegisterModal(navigationStore));
 
-            NewTabTabelasCommand = new NewTabCommand<CTabItemViewModel>(_tabControlStore, () => new CTabTabelasViewModel());
+            NewTabTabelasCommand = new NewTabCommand<CTabItemViewModel>(_tabControlStore, () => new CTabTabelasViewModel(navigationStore));
 
         }
 
