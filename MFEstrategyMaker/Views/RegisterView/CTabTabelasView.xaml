@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MFEstrategyMaker.Views.RegisterView" xmlns:registerviewmodel="clr-namespace:MFEstrategyMaker.ViewModels.RegisterViewModel" d:DataContext="{d:DesignInstance Type=registerviewmodel:CTabTabelasViewModel}"
+             xmlns:local="clr-namespace:MFEstrategyMaker.Views.RegisterView" xmlns:registerviewmodel="clr-namespace:MFEstrategyMaker.ViewModels.RegisterViewModel" xmlns:components="clr-namespace:MFEstrategyMaker.Views.Components" d:DataContext="{d:DesignInstance Type=registerviewmodel:CTabTabelasViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="white">
@@ -29,10 +29,7 @@
                     <Button Content="Importar" Width="60" />
                 </WrapPanel>
                 <StackPanel>
-                    <ListBox>
-                        <ListBoxItem Content="Constantes_Matematicas"/>
-                        <ListBoxItem Content="Reunioes_COPOM"/>
-                    </ListBox>
+                    <components:dbTableNamesList />
                 </StackPanel>
             </StackPanel>
         </Grid>
