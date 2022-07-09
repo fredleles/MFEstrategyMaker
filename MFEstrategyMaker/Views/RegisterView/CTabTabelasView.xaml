@@ -24,13 +24,17 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <WrapPanel>
+                <WrapPanel Height="20">
                     <Button Content="Criar" Width="60" Command="{Binding NewDBTable}" />
                     <Button Content="Importar" Width="60" />
                 </WrapPanel>
                 <StackPanel>
                     <components:dbTableNamesList />
                 </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <components:dbTableContent />
             </StackPanel>
         </Grid>
     </Grid>
