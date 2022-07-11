@@ -11,7 +11,7 @@ namespace MFEstrategyMaker.ViewModels.RegisterViewModel
     public class DbTableContentVM : ViewModelBase
     {
         private readonly SelectedDbTableStore _selectedDbTableStore;
-        private DbTableContentModel? SelectedDbTable => _selectedDbTableStore.SelectedDbTable;
+        private DbTablePropsModel? SelectedDbTable => _selectedDbTableStore.SelectedDbTable;
 
         public bool HasSelectedDbTable => SelectedDbTable != null;
         public string? TableNameId => SelectedDbTable?.TableNameId;

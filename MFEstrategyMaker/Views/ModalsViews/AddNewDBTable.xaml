@@ -36,7 +36,8 @@
                 <WrapPanel Grid.Row="0" VerticalAlignment="Center"
                            HorizontalAlignment="Center">
                     <TextBlock Text="Id da tabela:" />
-                    <TextBox Width="200" Margin="10 0 0 0"/>
+                    <TextBox Width="200" Margin="10 0 0 0"
+                             Text="{Binding TableNameId, UpdateSourceTrigger=PropertyChanged}"/>
                 </WrapPanel>
 
                 <StackPanel Grid.Row="1" Background="gray" VerticalAlignment="Top">

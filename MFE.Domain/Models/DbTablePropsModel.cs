@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace MFE.Domain.Models
 {
-    public class DbTableContentModel
+    public class DbTablePropsModel
     {
+        public Guid Id { get; }
         public string TableNameId { get; }
 
-        public DbTableContentModel(string tableNameId)
+        public DbTablePropsModel(Guid id, string tableNameId)
         {
+            Id = id;
             TableNameId = tableNameId;
         }
     }

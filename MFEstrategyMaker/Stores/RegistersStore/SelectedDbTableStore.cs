@@ -10,9 +10,10 @@ namespace MFEstrategyMaker.Stores.RegistersStore
     public class SelectedDbTableStore
     {
         public event Action SelectedDbTableChanged;
-        private DbTableContentModel _selectedDbTable;
+        private DbTablePropsModel _selectedDbTable;
+        private readonly DbTablesNameStore _dbTablesNameStore;
 
-        public DbTableContentModel SelectedDbTable
+        public DbTablePropsModel SelectedDbTable
         {
             get { return _selectedDbTable; }
             set
@@ -22,5 +23,18 @@ namespace MFEstrategyMaker.Stores.RegistersStore
             }
         }
 
+        public SelectedDbTableStore(DbTablesNameStore dbTablesNameStore)
+        {
+            _dbTablesNameStore = dbTablesNameStore;
+            _dbTablesNameStore.DbTableUpdate += _dbTablesNameStore_DbTableUpdate;
+        }
+
+        private void _dbTablesNameStore_DbTableUpdate(DbTablePropsModel dbTablePropsModel)
+        {
+            if(dbTablePropsModel.Id == SelectedDbTable?.Id)
+            {
+                SelectedDbTable = dbTablePropsModel;
+            }
+        }
     }
 }

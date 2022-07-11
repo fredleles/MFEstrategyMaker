@@ -17,10 +17,13 @@ namespace MFEstrategyMaker.ViewModels.RegisterViewModel
         public ICommand NewDBTable { get; }
         public DbTableContentVM DbTableContentVM { get; }
 
+        private readonly DbTablesNameStore _dbTablesNameStore;
+        private readonly NavigationStore _navigationStore;
+
         private readonly ObservableCollection<DbTableNamesListCompVM> _dbTableNamesListCompVM;
         public IEnumerable<DbTableNamesListCompVM> DbTableNamesListCompVM => _dbTableNamesListCompVM;
-        private readonly SelectedDbTableStore _selectedDbTableStore;
 
+        private readonly SelectedDbTableStore _selectedDbTableStore;
         private DbTableNamesListCompVM? _selectedDbTableNamesList;
         public DbTableNamesListCompVM SelectedDbTableNamesList
         {
@@ -29,24 +32,45 @@ namespace MFEstrategyMaker.ViewModels.RegisterViewModel
             {
                 _selectedDbTableNamesList = value;
                 OnPropertyChanged(nameof(SelectedDbTableNamesList));
-                _selectedDbTableStore.SelectedDbTable = _selectedDbTableNamesList?.DbTableContentModel;
+                _selectedDbTableStore.SelectedDbTable = _selectedDbTableNamesList?.DbTablePropsModel;
             }
         }
         public CTabTabelasViewModel(NavigationStore navigationStore)
         {
             TabName = "Tabelas";
 
-            _selectedDbTableStore = new SelectedDbTableStore();
+            _dbTablesNameStore = new DbTablesNameStore();
+            _selectedDbTableStore = new SelectedDbTableStore(_dbTablesNameStore);
+            _navigationStore = navigationStore;
 
-            NewDBTable = new OpenModalCommand<AddNewDBTableVM>(navigationStore,
-                () => new AddNewDBTableVM(navigationStore));
+            NewDBTable = new OpenModalCommand<AddNewDBTableVM>(_navigationStore,
+                () => new AddNewDBTableVM(_navigationStore, _dbTablesNameStore));
 
             _dbTableNamesListCompVM = new ObservableCollection<DbTableNamesListCompVM>();
             DbTableContentVM = new DbTableContentVM(_selectedDbTableStore);
 
-            _dbTableNamesListCompVM.Add(new DbTableNamesListCompVM(new DbTableContentModel("Constantes")));
-            _dbTableNamesListCompVM.Add(new DbTableNamesListCompVM(new DbTableContentModel("Reuniões_COPOM")));
+            _dbTablesNameStore.DbTableCreated += DbTablesNameStore_DbTableCreated;
+            _dbTablesNameStore.DbTableUpdate += DbTablesNameStore_DbTableUpdate;
+        }
+        public override void Dispose()
+        {
+            _dbTablesNameStore.DbTableCreated -= DbTablesNameStore_DbTableCreated;
+            _dbTablesNameStore.DbTableUpdate -= DbTablesNameStore_DbTableUpdate;
+            base.Dispose();
+        }
+        private void DbTablesNameStore_DbTableCreated(DbTablePropsModel dbTablePropsModel)
+        {
+            _dbTableNamesListCompVM.Add(new DbTableNamesListCompVM(dbTablePropsModel, _navigationStore, _dbTablesNameStore));
+        }
+        private void DbTablesNameStore_DbTableUpdate(DbTablePropsModel dbTablePropsModel)
+        {
+            DbTableNamesListCompVM? itemToUpdate =
+                _dbTableNamesListCompVM.FirstOrDefault(y => y.DbTablePropsModel.Id == dbTablePropsModel.Id);
 
+            if (itemToUpdate != null)
+            {
+                itemToUpdate.Update(dbTablePropsModel);
+            }
         }
     }
 }
